@@ -9,7 +9,7 @@ export const Room = () => {
 
     useEffect(()=>{
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color( 0x3C4145);
+        scene.background = new THREE.Color( 0x2D3235);
         const camera = new THREE.PerspectiveCamera(
             30,
             window.innerWidth / window.innerHeight,
@@ -28,16 +28,17 @@ export const Room = () => {
         document.body.appendChild(renderer.domElement);
 
 
-        // light
+        //light
 
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
         ambientLight.castShadow=true;
         scene.add(ambientLight)
         
-        const spotLight = new THREE.SpotLight(0xffffff,0.5);
+        const spotLight = new THREE.SpotLight(0xffffff,0.5, 100, Math.PI/4);
         spotLight.castShadow = true;
         spotLight.position.set(0, 20, 5);
         spotLight.rotateZ(10)
+        spotLight.castShadow = true;
         scene.add(spotLight);
 
         //floor
@@ -55,6 +56,8 @@ export const Room = () => {
         const thdFloorMaterial = new THREE.MeshToonMaterial( {color: 0x534D41});
         const thdFloor = new THREE.Mesh(thdFloorGeometry, thdFloorMaterial);
         thdFloor.position.set(0, -1, 0);
+        thdFloor.castShadow = true;
+        thdFloor.receiveShadow = true;
         scene.add(fstFloor, scdFloor, thdFloor);
 
         const carpetGeometry = new THREE.PlaneGeometry(50,50)
