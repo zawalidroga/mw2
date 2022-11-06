@@ -3,7 +3,6 @@ import { useEffect  } from 'react';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 
-
 export const Room = () => {
 
 
@@ -43,38 +42,68 @@ export const Room = () => {
 
         //floor
 
-        const fstFloorGeometry = new THREE.BoxGeometry(50,1,50);
+        const fstFloorGeometry = new THREE.BoxGeometry(35,1,25);
         const fstFloorMaterial = new THREE.MeshToonMaterial( {color: 0x534D41});
         const fstFloor = new THREE.Mesh(fstFloorGeometry, fstFloorMaterial);
         fstFloor.position.set(0, 1, 0);
 
-        const scdFloorGeometry = new THREE.BoxGeometry(50,1,50);
+        const scdFloorGeometry = new THREE.BoxGeometry(35,1,25);
         const scdFloorMaterial = new THREE.MeshToonMaterial( {color: 0x6B5B4B});
         const scdFloor = new THREE.Mesh(scdFloorGeometry, scdFloorMaterial);
 
-        const thdFloorGeometry = new THREE.BoxGeometry(50,1,50);
-        const thdFloorMaterial = new THREE.MeshToonMaterial( {color: 0x534D41});
-        const thdFloor = new THREE.Mesh(thdFloorGeometry, thdFloorMaterial);
+        const thdFloor = new THREE.Mesh(fstFloorGeometry, fstFloorMaterial);
         thdFloor.position.set(0, -1, 0);
         thdFloor.castShadow = true;
         thdFloor.receiveShadow = true;
-        scene.add(fstFloor, scdFloor, thdFloor);
 
-        const carpetGeometry = new THREE.PlaneGeometry(50,50)
+
+        const carpetGeometry = new THREE.PlaneGeometry(35, 25)
         const carpetMaterial = new THREE.MeshToonMaterial( {color: 0x5E8276, side: THREE.DoubleSide} );
         const carpet = new THREE.Mesh(carpetGeometry,carpetMaterial);
         carpet.rotateX( Math.PI / 2);
         carpet.position.set(0, 1.6, 0);
-        scene.add(carpet)
+        
+        const floor = new THREE.Group();
+        floor.add(thdFloor,fstFloor,scdFloor,carpet);
 
         
+        scene.add(floor)
 
+
+        //desk
+
+        const deskTopGeom = new THREE.BoxGeometry(15, 0.2, 4);
+        const deskMat = new THREE.MeshToonMaterial( { color: 0x82756D} )
+        const deskTop = new THREE.Mesh(deskTopGeom, deskMat);
+        deskTop.position.set(-10, 4, -10.5);
+
+        const deskLegGeo = new THREE.BoxGeometry(0.4, 3, 0.4);
+        const deskLeg = new THREE.Mesh(deskLegGeo, deskMat);
+        deskLeg.position.set(-16,2.7,-9.5);
+        deskLeg.rotateX(-Math.PI / 6);
+
+        const deskLeg2 = deskLeg.clone()    
+        const deskLeg3 = deskLeg.clone()     
+        const deskLeg4 = deskLeg.clone();
+
+        deskLeg2.position.set(-16,2.7,-11.5);      
+        deskLeg3.position.set(-4,2.7,-9.5);      
+        deskLeg4.position.set(-4,2.7,-11.5); 
+        
+        deskLeg2.rotateX(Math.PI / 3)
+        deskLeg4.rotateX(Math.PI / 3)
+        
+
+        const desk = new THREE.Group();
+        desk.add(deskTop,deskLeg, deskLeg2, deskLeg3, deskLeg4);
+
+        scene.add(desk);
 
        
 
-        const ligthHelper = new THREE.PointLightHelper(spotLight);
-        const gridHelper = new THREE.GridHelper(200, 50);
-        scene.add( ligthHelper, gridHelper);
+        // const ligthHelper = new THREE.PointLightHelper(spotLight);
+        // const gridHelper = new THREE.GridHelper(200, 50);
+        // scene.add( ligthHelper, gridHelper);
 
 
 
