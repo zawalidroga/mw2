@@ -1,9 +1,13 @@
-import { Room } from './components/room'
+import { Blop } from './components/blop';
+import React from 'react';
+import { Canvas } from "@react-three/fiber";
 
 function App() {
   return (
     <div className="App">
-      <Room />
+      <Canvas>
+        <Blop />
+      </Canvas>
     </div>
   );
 }

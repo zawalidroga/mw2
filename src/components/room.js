@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { useEffect  } from 'react';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-
+import React from 'react';
 
 export const Room = () => {
 
@@ -99,13 +99,9 @@ export const Room = () => {
 
         scene.add(desk);
 
-       
-
-        // const ligthHelper = new THREE.PointLightHelper(spotLight);
-        // const gridHelper = new THREE.GridHelper(200, 50);
-        // scene.add( ligthHelper, gridHelper);
-
-
+        const ligthHelper = new THREE.PointLightHelper(spotLight);
+        const gridHelper = new THREE.GridHelper(200, 50);
+        scene.add( ligthHelper, gridHelper);
 
 
         const controls = new OrbitControls(camera, renderer.domElement);
