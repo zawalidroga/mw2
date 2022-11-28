@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import gsap from "gsap";
 import { createNoise3D } from "simplex-noise";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 
 
@@ -11,36 +11,45 @@ const particlesNumber = 6000;
 export const Blop = () => {
     const vertices = new Float32Array(particlesNumber * 3);
     const distance = Math.min(200, window.innerWidth / 4);
-    const particlePosition = new THREE.Float32BufferAttribute(vertices, 3);
-    const particleBasePosition = new THREE.BufferAttribute().copy(
-        particlePosition
-      );
     
 
-//   useEffect(() => {
-//     console.log(particleBasePosition)
-//     let p = particleBasePosition;
-//     let x, y, z;
-//     x = y = z = 0;
+      const ref = useRef(null);
 
-//     for (let i = 0; i < particlesNumber; i++) {
-//       const theta = THREE.MathUtils.randFloatSpread(360);
-//       const phi = THREE.MathUtils.randFloatSpread(360);
+useEffect(() => {
+    ref.current.setAttribute( 'position', new THREE.Float32BufferAttribute(vertices, 3));
+    ref.current.setAttribute(
+        "basePosition",
+        new THREE.BufferAttribute().copy(ref.current.attributes.position)
+      );
+},[])
 
-//       x = distance * Math.sin(theta) * Math.cos(phi);
-//       y = distance * Math.sin(theta) * Math.sin(phi);
-//       z = distance * Math.cos(theta);
+  useEffect(() => {
 
-//       p.setXYZ(i, x, y, z);
-//     }
-//   }, []);
+    let p = ref.current.getAttribute( 'basePosition' );
+    let x, y, z;
+    x = y = z = 0;
+
+    for (let i = 0; i < particlesNumber; i++) {
+      const theta = THREE.MathUtils.randFloatSpread(360);
+      const phi = THREE.MathUtils.randFloatSpread(360);
+
+      x = distance * Math.sin(theta) * Math.cos(phi);
+      y = distance * Math.sin(theta) * Math.sin(phi);
+      z = distance * Math.cos(theta);
+
+      p.setXYZ(i, x, y, z);
+    }
+  }, []);
 
   useFrame(() => {
     const time = performance.now() * 0.5;
-    const basePositionAttribute = particleBasePosition;
-    const positionAttribute = particlePosition;
+    
+    const basePositionAttribute = ref.current.getAttribute('basePosition');
+    const positionAttribute = ref.current.getAttribute('position');
     const vertex = new THREE.Vector3();
 
+    console.log(basePositionAttribute)
+if(basePositionAttribute !== undefined){ 
     for (var i = 0; i < particlesNumber; i++) {
       vertex.fromBufferAttribute(basePositionAttribute, i);
 
@@ -56,14 +65,21 @@ export const Blop = () => {
       positionAttribute.setXYZ(i, vertex.x, vertex.y, vertex.z);
     }
 
-  });
+  }});
 
   return (
     <>
       <points boundingSphere={50} >
-        <sphereGeometry args={ [15,50,16]}
+        <bufferGeometry
+            ref={ref}
+            attach = 'geometry'
+
         />
-        <pointsMaterial color={0xff44ff} size={1} />
+        <pointsMaterial 
+            color={0xff44ff} 
+            size={1} 
+            attach = 'material'
+        />
       </points>
     </>
   );
