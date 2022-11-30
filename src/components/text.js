@@ -13,8 +13,14 @@ export const Text = () =>{
     return(
         <>
             <mesh>
-                <textGeometry args={['helo', {font, size: 50, height:20, color: '0xffffff'}]} />
-                <meshPhysicalMaterial attach='material' color='0xffffff' />
+                <textGeometry args={[
+                    'helo',
+                    {font, size: 50, height:20, }
+                    ]} />
+                <meshBasicMaterial 
+                    attach='material' 
+                    color={'white' }
+                    />
             </mesh>
         </>
     )
