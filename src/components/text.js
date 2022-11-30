@@ -12,14 +12,15 @@ export const Text = () =>{
 
     return(
         <>
-            <mesh>
+            <mesh position={[-60,0,200]}>
                 <textGeometry args={[
                     'helo',
-                    {font, size: 50, height:20, }
+                    {font, size: 50, height:10, }
                     ]} />
+
                 <meshBasicMaterial 
-                    attach='material' 
-                    color={'white' }
+                    attach='material'   
+                    color={'#000000'}
                     />
             </mesh>
         </>
