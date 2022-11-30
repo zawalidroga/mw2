@@ -3,16 +3,16 @@ import gsap from "gsap";
 import { createNoise3D } from "simplex-noise";
 import React, { useEffect, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
-
+import {Text} from './text'
 
 const noise3d = createNoise3D();
-const particlesNumber = 6000;
+
 
 export const Blop = () => {
     const [rotationX, setRotationX] = useState(0);
     const [rotationY, setRotationY] = useState(0);
 
-
+    const particlesNumber = 6000;
     const vertices = new Float32Array(particlesNumber * 3);
     const distance = Math.min(200, window.innerWidth / 4);
     
@@ -66,11 +66,9 @@ if(basePositionAttribute !== undefined){
         vertex.z * 0.003
       );
 
-      let ratio = noise * 0.4 * (0.8 + 0.1) + 0.8;
+      let ratio = noise * 0.36 + 0.8;
       vertex.multiplyScalar(ratio);
 
-        // setVertexo(() => [])
-        // console.log(vertexo)
       positionAttribute.setXYZ(i, vertex.x, vertex.y, vertex.z);
 
     }
@@ -85,12 +83,16 @@ if(basePositionAttribute !== undefined){
     refPoints.current.geometry.computeBoundingSphere();
   }});
 
+  const clickHandle = () => {
+    console.log('click')
+  }
+
   return (
     <>
-      <points boundingSphere={50} ref={refPoints}>
+      <points boundingSphere={50} ref={refPoints} onMouseDown={clickHandle}>
         <bufferGeometry
             ref={ref}
-            attach = 'geometry'
+            attach = 'geometry' 
 
         />
         <pointsMaterial 
@@ -99,6 +101,8 @@ if(basePositionAttribute !== undefined){
             attach = 'material'
         />
       </points>
+
+      <Text />
     </>
   );
 };
