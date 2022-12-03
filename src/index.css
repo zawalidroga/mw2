@@ -12,3 +12,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.hover-clover{
+  height: 200px;
+  width: 200px;
+  position: fixed;
+  top: calc(50% - 100px);
+  left: calc(50% - 100px);
+  z-index: 1;
+}
