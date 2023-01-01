@@ -81,14 +81,14 @@ export const Blop = (props) => {
     }
   });
 
-  useEffect(()=>{
+  useEffect(() => {
     gsap.timeline().to(refPoints.current.scale, {
       x: props.blopScale,
       y: props.blopScale,
       z: props.blopScale,
       ease: "ease.in",
-    })
-  },[props.blopScale])
+    });
+  }, [props.blopScale]);
 
   const clickHandle = () => {
     console.log("click");
@@ -100,12 +100,10 @@ export const Blop = (props) => {
 
   return (
     <>
-      <points boundingSphere={50} ref={refPoints}  >
+      <points boundingSphere={50} ref={refPoints}>
         <bufferGeometry ref={ref} attach="geometry" />
         <pointsMaterial color={0xff44ff} size={1} attach="material" />
       </points>
-
-      <Text  />
     </>
   );
 };
