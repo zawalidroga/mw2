@@ -33,7 +33,7 @@ const Container = styled.div`
   }
 `;
 
-const FrontPage = () => {
+const FrontPage = (props) => {
   const [isHover, setIsHover] = useState(false);
 
   const foo = (e) => {
@@ -46,7 +46,9 @@ const FrontPage = () => {
       onMouseLeave={() => foo(false)}
       isMouseOn={isHover}
     >
-      <div className="main-text">WELCOME</div>
+      <div className="main-text" onClick={props.clickHandler}>
+        WELCOME
+      </div>
       <div className="text first">WELCOME</div>
       <div className="text second">WELCOME</div>
       <div className="text third">WELCOME</div>
