@@ -1,11 +1,32 @@
+export const circleConf = {
+  radiusMin: 5,
+  radiusMax: 10,
+  speed: 9,
+  color: [
+    [0, 53, 71],
+    [0, 94, 84],
+    [194, 187, 0],
+    [225, 82, 61],
+    [237, 139, 22],
+  ],
+  opacity: 0.5,
+  deceleration: 0.1,
+};
+
 class Circle {
-  constructor(position) {
+  constructor(position, circleConf) {
     this.position = position;
-    this.radius = Math.floor(Math.random() * 5) + 5;
-    this.dx = (Math.round(Math.random()) * 2 - 1) * Math.random();
-    this.dy = (Math.round(Math.random()) * 2 - 1) * Math.random();
-    this.rgb = [2, 100, 100];
-    this.opacity = 0.5;
+    this.radius =
+      Math.floor(
+        Math.random() * (circleConf.radiusMax - circleConf.radiusMin)
+      ) + circleConf.radiusMin;
+    this.dx =
+      (Math.round(Math.random()) * 2 - 1) * Math.random() * circleConf.speed;
+    this.dy =
+      (Math.round(Math.random()) * 2 - 1) * Math.random() * circleConf.speed;
+    this.rgb =
+      circleConf.color[Math.floor(Math.random() * circleConf.color.length)];
+    this.opacity = circleConf.opacity;
   }
 
   draw(ctx) {
@@ -29,7 +50,14 @@ class Circle {
     //this.opacity -= 0.0001;
     this.position.y += this.dy;
     this.position.x += this.dx;
+    this.dy < 0
+      ? (this.dy += circleConf.deceleration)
+      : (this.dy -= circleConf.deceleration);
+    this.dx < 0
+      ? (this.dx += circleConf.deceleration)
+      : (this.dx -= circleConf.deceleration);
     this.draw(ctx);
+
     // if (this.opacity === 0) {
     //   position.length = 0;
     //   circleArr.length = 0;

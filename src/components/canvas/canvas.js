@@ -12,8 +12,9 @@ const PicassoCanvas = (props) => {
   function anim() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     props.circleArr.forEach((e) => e.update(canvas, ctx));

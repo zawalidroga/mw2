@@ -40,15 +40,19 @@ const FrontPage = (props) => {
     setIsHover(e);
   };
 
+  const clickHandler = (e) => {
+    foo(e);
+    props.clickHandler();
+  };
+
   return (
     <Container
       onMouseOver={() => foo(true)}
       onMouseLeave={() => foo(false)}
+      onClick={() => clickHandler(false)}
       isMouseOn={isHover}
     >
-      <div className="main-text" onClick={props.clickHandler}>
-        WELCOME
-      </div>
+      <div className="main-text">WELCOME</div>
       <div className="text first">WELCOME</div>
       <div className="text second">WELCOME</div>
       <div className="text third">WELCOME</div>
