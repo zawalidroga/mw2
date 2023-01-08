@@ -15,8 +15,8 @@ body {
 
 /* scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 0;
+  height: 0;
 }
 
 ::-webkit-scrollbar-track {
@@ -32,11 +32,6 @@ body {
   overflow: auto;
 }
 
-canvas {
-  position: fixed;
-  z-index: -1;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -47,7 +42,6 @@ code {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .hover-clover {
@@ -57,4 +51,18 @@ code {
   top: calc(50% - 100px);
   left: calc(50% - 100px);
   z-index: 1;
+}
+
+canvas {
+  top: 0;
+  position: fixed;
+  z-index: -1;
+}
+
+.front-wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

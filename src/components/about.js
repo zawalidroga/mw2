@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const ContainerAbout = styled.div`
   width: 700px;
-  height: 300px;
+  height: 700px;
   h2 {
     color: red;
     text-transform: uppercase;

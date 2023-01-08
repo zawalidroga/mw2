@@ -39,7 +39,7 @@ class Circle {
     ctx.fill();
   }
 
-  update(canvas, ctx) {
+  frontPageClick(canvas) {
     if (this.position.x > canvas.width || this.position.x < 0) {
       this.dx = -this.dx;
     }
@@ -56,12 +56,15 @@ class Circle {
     this.dx < 0
       ? (this.dx += circleConf.deceleration)
       : (this.dx -= circleConf.deceleration);
-    this.draw(ctx);
+  }
 
-    // if (this.opacity === 0) {
-    //   position.length = 0;
-    //   circleArr.length = 0;
-    // }
+  aboutSite() {
+    //funkcja startuje przy skrolowaniu pierwszym
+  }
+
+  update(canvas, ctx) {
+    this.frontPageClick(canvas);
+    this.draw(ctx);
   }
 }
 
