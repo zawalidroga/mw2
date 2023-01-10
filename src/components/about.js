@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 const ContainerAbout = styled.div`
+background-color: rgb(73,73,73);
   width: 700px;
   height: 700px;
   h2 {
@@ -11,8 +12,14 @@ const ContainerAbout = styled.div`
 `;
 
 export const About = () => {
+  const containerRef = useRef();
+
+  useEffect(() => {
+    console.log(containerRef.current.offsetTop);
+  },[]);
+
   return (
-    <ContainerAbout>
+    <ContainerAbout ref={containerRef}>
       <h2>About me</h2>
       <p>
         ' Magna nisi duis minim in. Ipsum reprehenderit dolore eu Lorem anim

@@ -15,12 +15,16 @@ function App() {
   const circlePosRef = useRef([]);
   const circlePos = circlePosRef.current;
 
-  const clickHandler = () => {
+  const circlesMaker = () => {
     const offset = circleArr.length;
     for (let i = 0; i < 100; i++) {
       circlePos.push({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
       circleArr.push(new Circle(circlePos[i + offset], circleConf));
     }
+  }
+
+  const clickHandler = () => {
+    circlesMaker();
     setIsClicked(true);
 
     document.body.classList.add("enable-scrolling");

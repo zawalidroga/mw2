@@ -20,7 +20,6 @@ const FrontPage = (props) => {
     window.scrollY > containerRef.current.offsetTop
       ? setIsScrolled(true)
       : setIsScrolled(false);
-    console.log(isScrolled);
   }, [props.scrollPosition]);
 
   return (
@@ -31,7 +30,7 @@ const FrontPage = (props) => {
       isMouseOn={isHover}
       scrolledPos={isScrolled}
     >
-      <div className="mw-container">MW</div>
+      <div className="mw-container">DUPERSKO</div>
       <div className="meet-container">LET'S MEET</div>
       <div className="welcome-container">
         <div
