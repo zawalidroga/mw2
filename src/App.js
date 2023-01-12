@@ -10,6 +10,7 @@ import Circle, { circleConf } from "./components/canvas/circle";
 function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
+  const [aboutPosition, setAboutPosition] = useState(8888);
   const circleArrRef = useRef([]);
   const circleArr = circleArrRef.current;
   const circlePosRef = useRef([]);
@@ -21,7 +22,7 @@ function App() {
       circlePos.push({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
       circleArr.push(new Circle(circlePos[i + offset], circleConf));
     }
-  }
+  };
 
   const clickHandler = () => {
     circlesMaker();
@@ -34,6 +35,10 @@ function App() {
     setScrollPosition(window.scrollY);
   };
 
+  const positionHandler = (position) => {
+    setAboutPosition(position);
+  };
+
   useEffect(() => {
     document.addEventListener("scroll", (e) => scrollPosHandler());
   }, [scrollPosition]);
@@ -41,7 +46,11 @@ function App() {
   return (
     <div className="App">
       <Header isClicked={isClicked} />
-      <PicassoCanvas circleArr={circleArr} />
+      <PicassoCanvas
+        circleArr={circleArr}
+        scrollPosition={scrollPosition}
+        aboutPosition={aboutPosition}
+      />
       <div className="front-wrapper">
         <FrontPage
           clickHandler={clickHandler}
@@ -49,7 +58,7 @@ function App() {
           scrollPosition={scrollPosition}
         />
       </div>
-      <About />
+      <About aboutPosition={positionHandler} />
     </div>
   );
 }

@@ -3,11 +3,6 @@ import { ThemeProvider } from "styled-components";
 
 const PicassoCanvas = (props) => {
   const canvasRef = useRef(null);
-  const circleArr = [];
-  const rgbHandler = [];
-
-  const circlePosRef = useRef([]);
-  const circlePos = circlePosRef.current;
 
   function anim() {
     const canvas = canvasRef.current;
@@ -17,13 +12,16 @@ const PicassoCanvas = (props) => {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    props.circleArr.forEach((e) => e.update(canvas, ctx));
+    props.circleArr.forEach((e) => {
+      e.aboutSite(props.scrollPosition, props.aboutPosition);
+      e.update(canvas, ctx);
+    });
     requestAnimationFrame(anim);
   }
 
   useEffect(() => {
     requestAnimationFrame(anim);
-  }, []);
+  }, [props.scrollPosition, props.aboutPosition]);
   return <canvas ref={canvasRef}></canvas>;
 };
 

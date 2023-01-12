@@ -58,13 +58,19 @@ class Circle {
       : (this.dx -= circleConf.deceleration);
   }
 
-  aboutSite() {
-    //funkcja startuje przy skrolowaniu pierwszym
+  aboutSite(scrollPosition, aboutPosition) {
+    if (this.position.y + 2 * this.radius > aboutPosition - scrollPosition) {
+      this.position.y = aboutPosition - scrollPosition - this.radius * 2;
+      //this.position.x += 0.001;
+    }
   }
 
   update(canvas, ctx) {
     this.frontPageClick(canvas);
     this.draw(ctx);
+  }
+  positioncheck() {
+    console.log(this.position.y);
   }
 }
 

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 const ContainerAbout = styled.div`
-background-color: rgb(73,73,73);
+  background-color: rgb(73, 73, 73);
   width: 700px;
   height: 700px;
   h2 {
@@ -11,12 +11,12 @@ background-color: rgb(73,73,73);
   }
 `;
 
-export const About = () => {
+export const About = (props) => {
   const containerRef = useRef();
 
   useEffect(() => {
-    console.log(containerRef.current.offsetTop);
-  },[]);
+    props.aboutPosition(containerRef.current.offsetTop);
+  }, []);
 
   return (
     <ContainerAbout ref={containerRef}>
