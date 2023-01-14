@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import Anime, { anime } from "react-anime";
 
 const ContainerAbout = styled.div`
   width: 100%;
@@ -18,7 +19,7 @@ const ContainerAbout = styled.div`
     border-color: transparent transparent rgb(238, 59, 36) transparent;
 
     h2 {
-      margin: 3em 0;
+      margin: 4.3em 0;
       position: absolute;
       transform: translate(-50%, 0);
       letter-spacing: 0.5em;
@@ -57,15 +58,19 @@ const ContainerAbout = styled.div`
   .text-wrapper {
     background-color: rgb(238, 59, 36);
     height: 700px;
-    p {
-      width: 50%;
+    div {
       position: relative;
-      margin: 0;
       top: -20%;
-      left: 50vw;
-      transform: translate(-50%, 0);
+      p {
+        width: 50%;
+        position: relative;
+        margin: 0;
+        top: -20%;
+        left: 50vw;
+        transform: translate(-50%, 0);
 
-      text-align: center;
+        text-align: center;
+      }
     }
   }
 `;
@@ -94,19 +99,24 @@ export const About = (props) => {
     >
       <div className="triangle">
         <h2 className="underline-hover-effect" onClick={onClickHandle}>
-          {isClicked ? "X" : "Let's meet"}
+          {"Let's meet"}
         </h2>
       </div>
       <div className="text-wrapper">
-        <p>
-          ' Magna nisi duis minim in. Ipsum reprehenderit dolore eu Lorem anim
-          aliquip in cupidatat. Elit ex elit laboris ea est do tempor fugiat id.
-          Eu ad nulla occaecat labore excepteur do eiusmod veniam. Qui irure
-          labore commodo dolore cillum velit deserunt ex amet mollit
-          exercitation. Dolore ullamco mollit consequat ad labore adipisicing
-          veniam ipsum Lorem incididunt minim consectetur. Quis id fugiat ut
-          laborum.'
-        </p>
+        <Anime
+          delay={isClicked ? anime.stagger(100, { start: 200 }) : null}
+          scale={[0.1, 1]}
+        >
+          <p>
+            ' Magna nisi duis minim in. Ipsum reprehenderit dolore eu Lorem anim
+            aliquip in cupidatat. Elit ex elit laboris ea est do tempor fugiat
+            id. Eu ad nulla occaecat labore excepteur do eiusmod veniam. Qui
+            irure labore commodo dolore cillum velit deserunt ex amet mollit
+            exercitation. Dolore ullamco mollit consequat ad labore adipisicing
+            veniam ipsum Lorem incididunt minim consectetur. Quis id fugiat ut
+            laborum.'
+          </p>
+        </Anime>
       </div>
     </ContainerAbout>
   );

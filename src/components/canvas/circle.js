@@ -67,7 +67,10 @@ class Circle {
   }
 
   aboutSite(scrollPosition, aboutPosition, aboutWidth) {
-    if (this.position.y + 2 * this.radius > aboutPosition - scrollPosition) {
+    if (
+      this.position.y + 2 * this.radius > aboutPosition - scrollPosition &&
+      aboutPosition - scrollPosition > 0
+    ) {
       this.position.y = aboutPosition - scrollPosition - this.radius * 2;
       //this.position.x += 0.001;
     }
