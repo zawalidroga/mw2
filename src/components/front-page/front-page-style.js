@@ -4,6 +4,7 @@ export const Container = styled.div`
   position: ${(props) => (props.scrolledPos ? "fixed" : "relative")};
   top: -15px;
   font-family: "Teko", sans-serif;
+  color: rgb(238, 59, 36);
   height: 3em;
   width: 7em;
   display: flex;
@@ -41,6 +42,7 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 0;
 
     .text {
       position: absolute;

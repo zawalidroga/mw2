@@ -2,12 +2,20 @@ export const circleConf = {
   radiusMin: 5,
   radiusMax: 10,
   speed: 9,
+  // color: [
+  //   [0, 53, 71],
+  //   [0, 94, 84],
+  //   [194, 187, 0],
+  //   [225, 82, 61],
+  //   [237, 139, 22],
+  // ],
   color: [
-    [0, 53, 71],
-    [0, 94, 84],
-    [194, 187, 0],
-    [225, 82, 61],
-    [237, 139, 22],
+    [189, 145, 84],
+    [238, 59, 36],
+    [26, 22, 23],
+    [0, 128, 67],
+    [5, 82, 164],
+    [250, 164, 27],
   ],
   opacity: 0.5,
   deceleration: 0.1,
@@ -58,7 +66,7 @@ class Circle {
       : (this.dx -= circleConf.deceleration);
   }
 
-  aboutSite(scrollPosition, aboutPosition) {
+  aboutSite(scrollPosition, aboutPosition, aboutWidth) {
     if (this.position.y + 2 * this.radius > aboutPosition - scrollPosition) {
       this.position.y = aboutPosition - scrollPosition - this.radius * 2;
       //this.position.x += 0.001;

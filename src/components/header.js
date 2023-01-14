@@ -10,6 +10,7 @@ const Container = styled.header`
   display: flex;
   justify-content: flex-end;
   transition: 0.5s ease-out;
+  z-index: 9;
 
   .wrapper {
     display: flex;

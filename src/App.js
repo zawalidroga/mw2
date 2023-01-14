@@ -2,6 +2,7 @@ import { Blop } from "./components/blop";
 import React, { useRef, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { About } from "./components/about";
+import { Skills } from "./components/skills";
 import Header from "./components/header";
 import FrontPage from "./components/front-page/front-page";
 import PicassoCanvas from "./components/canvas/canvas";
@@ -11,6 +12,7 @@ function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
   const [aboutPosition, setAboutPosition] = useState(8888);
+  const [aboutWidth, setAboutWidth] = useState(9999);
   const circleArrRef = useRef([]);
   const circleArr = circleArrRef.current;
   const circlePosRef = useRef([]);
@@ -35,8 +37,9 @@ function App() {
     setScrollPosition(window.scrollY);
   };
 
-  const positionHandler = (position) => {
+  const positionHandler = (position, width) => {
     setAboutPosition(position);
+    setAboutWidth(width);
   };
 
   useEffect(() => {
@@ -50,6 +53,7 @@ function App() {
         circleArr={circleArr}
         scrollPosition={scrollPosition}
         aboutPosition={aboutPosition}
+        aboutWidth={aboutWidth}
       />
       <div className="front-wrapper">
         <FrontPage
@@ -58,7 +62,8 @@ function App() {
           scrollPosition={scrollPosition}
         />
       </div>
-      <About aboutPosition={positionHandler} />
+      <About aboutPosition={positionHandler} isClicked={isClicked} />
+      <Skills />
     </div>
   );
 }

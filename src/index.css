@@ -6,11 +6,11 @@ body {
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #e8e7e3;
+  background-color: #ebdfc5;
 
   /*disable scrolling*/
-  height: 100vh;
-  overflow: hidden;
+  /* height: 100vh;
+  overflow: hidden; */
 }
 
 /* scrollbar */
@@ -56,7 +56,7 @@ code {
 canvas {
   top: 0;
   position: fixed;
-  z-index: -1;
+  z-index: -3;
 }
 
 .front-wrapper {
@@ -65,4 +65,5 @@ canvas {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 0;
 }
