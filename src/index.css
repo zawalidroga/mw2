@@ -54,9 +54,6 @@ code {
 }
 
 canvas {
-  top: 0;
-  position: fixed;
-  z-index: -3;
 }
 
 .front-wrapper {

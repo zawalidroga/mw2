@@ -4,7 +4,7 @@ import Anime, { anime } from "react-anime";
 
 const ContainerAbout = styled.div`
   width: 100%;
-  position: fixed;
+  position: absolute;
   bottom: calc(-100% - 22em);
   color: rgb(235, 223, 197);
   transform: translatey(${(props) => (props.isClicked ? "-10em" : 0)});

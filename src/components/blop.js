@@ -3,7 +3,6 @@ import gsap from "gsap";
 import { createNoise3D } from "simplex-noise";
 import React, { useEffect, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Text } from "./text";
 
 const noise3d = createNoise3D();
 
@@ -102,7 +101,7 @@ export const Blop = (props) => {
     <>
       <points boundingSphere={50} ref={refPoints}>
         <bufferGeometry ref={ref} attach="geometry" />
-        <pointsMaterial color={0xff44ff} size={1} attach="material" />
+        <pointsMaterial color={0xfaa41b} size={1} attach="material" />
       </points>
     </>
   );

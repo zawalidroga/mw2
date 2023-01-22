@@ -1,5 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
-import { ThemeProvider } from "styled-components";
+import styled from "styled-components";
+
+const Canvas = styled.canvas`
+  top: 0;
+  position: fixed;
+  z-index: -3;
+`;
 
 const PicassoCanvas = (props) => {
   const canvasRef = useRef(null);
@@ -28,7 +34,7 @@ const PicassoCanvas = (props) => {
       e.aboutSite(props.scrollPosition, props.aboutPosition, props.aboutWidth);
     });
   }, [props.scrollPosition, props.aboutPosition]);
-  return <canvas ref={canvasRef}></canvas>;
+  return <Canvas ref={canvasRef}></Canvas>;
 };
 
 export default PicassoCanvas;

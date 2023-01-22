@@ -7,6 +7,29 @@ import Header from "./components/header";
 import FrontPage from "./components/front-page/front-page";
 import PicassoCanvas from "./components/canvas/canvas";
 import Circle, { circleConf } from "./components/canvas/circle";
+import { ShowOff } from "./components/projects";
+import { Contact } from "./components/contact";
+import { Blog } from "./components/blog";
+import styled from "styled-components";
+
+const Transition = styled.div`
+  width: 100vw;
+  //overflow: hidden;
+  .circle {
+    left: 50%;
+    transform: translatex(-50%) scale(3);
+    position: relative;
+    width: 100px;
+    height: 50px;
+    border-radius: 150px 150px 0 0;
+    background-color: #faa41b;
+    z-index: 4;
+  }
+  div {
+    height: 400px;
+    //background-color: #faa41b;
+  }
+`;
 
 function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -64,6 +87,12 @@ function App() {
       </div>
       <About aboutPosition={positionHandler} isClicked={isClicked} />
       <Skills />
+      <ShowOff scrollPosition={scrollPosition} />
+      <Transition className="transition-wrapper">
+        <div className="circle"></div>
+      </Transition>
+      <Blog />
+      <Contact />
     </div>
   );
 }
