@@ -14,21 +14,41 @@ import styled from "styled-components";
 
 const Transition = styled.div`
   width: 100vw;
+  height: 120vh;
+  background-color: #faa41b;
   //overflow: hidden;
   .circle {
+    /* bottom: ${(prop) => {
+      return prop.scrollPos < 2300 ? 0 : -prop.scrollPos + 2300;
+    }}; */
+    bottom: 0;
     left: 50%;
-    transform: translatex(-50%) scale(3);
-    position: relative;
+    transform: translatex(-50%)
+      scale(
+        ${(prop) => {
+          if (prop.scrollPos - prop.topPos + 1300 < 0) {
+            return 0;
+          } else if (prop.scrollPos > 2500) {
+            return 38;
+          } else {
+            return (prop.scrollPos - prop.topPos + 1300) / 10;
+          }
+        }}
+      );
+    position: ${(prop) => {
+      return prop.scrollPos > 2500 ? "relative" : "fixed";
+    }};
     width: 100px;
     height: 50px;
     border-radius: 150px 150px 0 0;
     background-color: #faa41b;
     z-index: 4;
+    transition: linear 0.1s;
   }
-  div {
+  /* .transition-body {
     height: 400px;
-    //background-color: #faa41b;
-  }
+    background-color: #faa41b;
+  } */
 `;
 
 function App() {
@@ -40,6 +60,8 @@ function App() {
   const circleArr = circleArrRef.current;
   const circlePosRef = useRef([]);
   const circlePos = circlePosRef.current;
+  const transitRef = useRef(0);
+  const transitDiv = transitRef.current;
 
   const circlesMaker = () => {
     const offset = circleArr.length;
@@ -67,6 +89,7 @@ function App() {
 
   useEffect(() => {
     document.addEventListener("scroll", (e) => scrollPosHandler());
+    console.log(scrollPosition);
   }, [scrollPosition]);
 
   return (
@@ -88,8 +111,15 @@ function App() {
       <About aboutPosition={positionHandler} isClicked={isClicked} />
       <Skills />
       <ShowOff scrollPosition={scrollPosition} />
-      <Transition className="transition-wrapper">
+      <Transition
+        className="transition-wrapper"
+        scrollPos={scrollPosition}
+        topPos={transitDiv.offsetTop}
+        height={transitDiv.offsetHeight}
+        ref={transitRef}
+      >
         <div className="circle"></div>
+        <div className="transition-body"></div>
       </Transition>
       <Blog />
       <Contact />

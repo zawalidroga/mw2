@@ -5,7 +5,7 @@ import { Blop } from "./blop";
 
 const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 160vh;
   background-color: rgb(26, 22, 23);
   overflow: hidden;
 
