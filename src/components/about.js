@@ -5,9 +5,9 @@ import Anime, { anime } from "react-anime";
 const ContainerAbout = styled.div`
   width: 100%;
   position: absolute;
-  bottom: calc(-100% - 22em);
+  bottom: calc(-100% - 16em);
   color: rgb(235, 223, 197);
-  transform: translatey(${(props) => (props.isClicked ? "-10em" : 0)});
+  transform: translatey(${(props) => (props.isClicked ? "-11em" : 0)});
   transition: 0.5s ease;
   z-index: 0;
 

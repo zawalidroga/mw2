@@ -9,18 +9,15 @@ import PicassoCanvas from "./components/canvas/canvas";
 import Circle, { circleConf } from "./components/canvas/circle";
 import { ShowOff } from "./components/projects";
 import { Contact } from "./components/contact";
-import { Blog } from "./components/blog";
+import { Blog } from "./components/blog/blog";
 import styled from "styled-components";
 
 const Transition = styled.div`
   width: 100vw;
   height: 120vh;
   background-color: #faa41b;
-  //overflow: hidden;
+
   .circle {
-    /* bottom: ${(prop) => {
-      return prop.scrollPos < 2300 ? 0 : -prop.scrollPos + 2300;
-    }}; */
     bottom: 0;
     left: 50%;
     transform: translatex(-50%)
