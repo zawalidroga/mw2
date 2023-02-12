@@ -86,7 +86,6 @@ function App() {
 
   useEffect(() => {
     document.addEventListener("scroll", (e) => scrollPosHandler());
-    console.log(scrollPosition);
   }, [scrollPosition]);
 
   return (

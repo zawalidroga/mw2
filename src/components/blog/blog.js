@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import Anime, { anime } from "react-anime";
 import { BlogArticle } from "./blog-article";
@@ -46,7 +46,6 @@ const articles = [
 
 const Container = styled.div`
   width: 100vw;
-  height: 75vh;
   background-color: rgb(0, 128, 67);
 
   z-index: 1;
@@ -69,18 +68,77 @@ const Container = styled.div`
     }
   }
 
-  .article-wrapper {
-    height: calc(100% - 4.8em);
-    display: grid;
-    grid-template-columns: auto auto auto;
-    grid-template-rows: auto auto;
-    justify-items: start;
+  .article-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+
+    .wrapper {
+      display: flex;
+      justify-content: space-evenly;
+      width: fit-content;
+      transition: 0.5s ease-out;
+    }
   }
 `;
 
+const mouse = {
+  x: 0,
+  y: 0,
+  clickX: 0,
+  acceleration: 0,
+  speed: 0,
+  prevX: 0,
+};
+
 export const Blog = () => {
+  const wrapperTopRef = useRef();
+  const wrapperTop = wrapperTopRef.current;
+  const wrapperBottomRef = useRef();
+  const wrapperBottom = wrapperBottomRef.current;
+  // const [isClickedTop, setIsClickedTop] = useState(false);
+  // const [isClickedBottom, setIsClickedBottom] = useState(false);
+  let isClickedTop = false;
+  let isClickedBottom = false;
+
+  let translateTop = 0;
+  let translateBottom = 0;
+
+  const mousePosition = (event) => {
+    mouse.x = event.pageX;
+    mouse.y = event.pageY;
+
+    if (isClickedTop) {
+      wrapperTop.style.transform = `translate(${
+        translateTop + mouse.x - mouse.clickX
+      }px)`;
+    }
+    if (isClickedBottom) {
+      wrapperBottom.style.transform = `translate(${
+        translateBottom + mouse.x - mouse.clickX
+      }px)`;
+    }
+  };
+
+  const mouseDownHandler = (e, isTop) => {
+    e.preventDefault();
+    mouse.clickX = e.pageX;
+    isTop ? (isClickedTop = true) : (isClickedBottom = true);
+  };
+
+  const mouseUpHandler = (isTop) => {
+    if (isTop) {
+      isClickedTop = false;
+      translateTop = translateTop + mouse.x - mouse.clickX;
+    } else {
+      isClickedBottom = false;
+      translateBottom = translateBottom + mouse.x - mouse.clickX;
+    }
+  };
+
   return (
-    <Container>
+    <Container onMouseMove={mousePosition}>
       <div className="title-container">
         <h2>
           <span>
@@ -97,16 +155,43 @@ export const Blog = () => {
           </span>
         </h2>
       </div>
-      <div className="article-wrapper">
-        {articles.map((e, i) => {
-          return (
-            <BlogArticle
-              articTitle={e.title}
-              color={articleColor[i < 6 ? i : i - 6]}
-              imgArt={e.img}
-            />
-          );
-        })}
+      <div className="article-container">
+        <div
+          className="wrapper wrapper-top"
+          ref={wrapperTopRef}
+          onMouseDown={(e) => {
+            mouseDownHandler(e, true);
+          }}
+          onMouseUp={() => mouseUpHandler(true)}
+        >
+          {articles.map((e, i) => {
+            return (
+              <BlogArticle
+                articTitle={e.title}
+                color={articleColor[i < 6 ? i : i - 6]}
+                imgArt={e.img}
+              />
+            );
+          })}
+        </div>
+        <div
+          className="wrapper wrapper-bottom"
+          ref={wrapperBottomRef}
+          onMouseDown={(e) => {
+            mouseDownHandler(e, false);
+          }}
+          onMouseUp={() => mouseUpHandler(false)}
+        >
+          {articles.map((e, i) => {
+            return (
+              <BlogArticle
+                articTitle={e.title}
+                color={articleColor[i < 6 ? i : i - 6]}
+                imgArt={e.img}
+              />
+            );
+          })}
+        </div>
       </div>
     </Container>
   );

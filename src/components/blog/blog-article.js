@@ -4,10 +4,12 @@ import styled from "styled-components";
 const Container = styled.div`
   /* height: calc((100vh - 4.8em) / 2);
   width: calc((100vw - 10%) / 4); */
+  width: 30em;
   padding: 1em;
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto auto;
+  grid-column-gap: 1em;
   align-items: start;
 
   h2 {
